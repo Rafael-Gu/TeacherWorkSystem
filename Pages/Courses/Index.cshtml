@@ -1,0 +1,114 @@
+﻿@page
+@model             IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].Teacher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].StartYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].EndYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].Semester)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].Credit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].PeriodThr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].PeriodExp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].CountNormal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].CountNonRetake)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].Count)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].IsNew)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].ExamType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Course) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teacher.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Semester)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodThr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PeriodExp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountNormal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountNonRetake)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsNew)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExamType)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

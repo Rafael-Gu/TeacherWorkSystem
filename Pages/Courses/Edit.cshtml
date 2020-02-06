@@ -1,0 +1,100 @@
+﻿@page
+@model             EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Course</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Course.Id" />
+            <div class="form-group">
+                <label asp-for="Course.SubjectID" class="control-label"></label>
+                <select asp-for="Course.SubjectID" class="form-control" asp-items="ViewBag.SubjectID"></select>
+                <span asp-validation-for="Course.SubjectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.TeacherID" class="control-label"></label>
+                <select asp-for="Course.TeacherID" class="form-control" asp-items="ViewBag.TeacherID"></select>
+                <span asp-validation-for="Course.TeacherID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.StartYear" class="control-label"></label>
+                <input asp-for="Course.StartYear" class="form-control" />
+                <span asp-validation-for="Course.StartYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.EndYear" class="control-label"></label>
+                <input asp-for="Course.EndYear" class="form-control" />
+                <span asp-validation-for="Course.EndYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.Semester" class="control-label"></label>
+                <input asp-for="Course.Semester" class="form-control" />
+                <span asp-validation-for="Course.Semester" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.Type" class="control-label"></label>
+                <input asp-for="Course.Type" class="form-control" />
+                <span asp-validation-for="Course.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.Credit" class="control-label"></label>
+                <input asp-for="Course.Credit" class="form-control" />
+                <span asp-validation-for="Course.Credit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.PeriodThr" class="control-label"></label>
+                <input asp-for="Course.PeriodThr" class="form-control" />
+                <span asp-validation-for="Course.PeriodThr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.PeriodExp" class="control-label"></label>
+                <input asp-for="Course.PeriodExp" class="form-control" />
+                <span asp-validation-for="Course.PeriodExp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.CountNormal" class="control-label"></label>
+                <input asp-for="Course.CountNormal" class="form-control" />
+                <span asp-validation-for="Course.CountNormal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.CountNonRetake" class="control-label"></label>
+                <input asp-for="Course.CountNonRetake" class="form-control" />
+                <span asp-validation-for="Course.CountNonRetake" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.Count" class="control-label"></label>
+                <input asp-for="Course.Count" class="form-control" />
+                <span asp-validation-for="Course.Count" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Course.IsNew" /> @Html.DisplayNameFor(model => model.Course.IsNew)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.ExamType" class="control-label"></label>
+                <input asp-for="Course.ExamType" class="form-control" />
+                <span asp-validation-for="Course.ExamType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
