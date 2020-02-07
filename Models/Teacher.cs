@@ -29,5 +29,13 @@ namespace TeacherWork.Models
         public string Rank { get; set; }
 
         public List<Course> Courses { get; set; }
+
+        public string IdName
+        {
+            get
+            {
+                return $"{Name}/{Id}";
+            }
+        }
     }
 }

@@ -21,9 +21,11 @@ namespace TeacherWork.Data
         }
 
         public DbSet<Teacher> Teacher { get; set; }
-
         public DbSet<Class> Class { get; set; }
         public DbSet<Subject> Subject { get; set; }
         public DbSet<Course> Course { get; set; }
+
+        public string strTeacher;
+        public string strSubject;
     }
 }

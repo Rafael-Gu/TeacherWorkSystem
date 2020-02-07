@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Pages\Subjects\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 

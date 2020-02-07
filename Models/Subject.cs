@@ -18,5 +18,7 @@ namespace TeacherWork.Models
         [Required]
         [Display(Name = "所属部门")]
         public string Department { get; set; }
+
+        public List<Course> Courses { get; set; }
     }
 }
