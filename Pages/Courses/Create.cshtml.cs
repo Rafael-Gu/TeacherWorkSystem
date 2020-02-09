@@ -14,6 +14,9 @@ namespace TeacherWork.Pages.Courses
     {
         private readonly TeacherWorkContext _context;
 
+        public string strTeacher;
+        public string strSubject;
+
         public CreateModel(TeacherWorkContext context)
         {
             _context = context;
@@ -21,8 +24,8 @@ namespace TeacherWork.Pages.Courses
 
         public IActionResult OnGet()
         {
-            ViewData["SubjectID"] = new SelectList(_context.Subject, "Id", "Id");
-            ViewData["TeacherID"] = new SelectList(_context.Teacher, "Id", "Id");
+            ViewData["SubjectID"] = new SelectList(_context.Subject, "Id", "Name");
+            ViewData["TeacherID"] = new SelectList(_context.Teacher, "Id", "IdName");
             return Page();
         }
 

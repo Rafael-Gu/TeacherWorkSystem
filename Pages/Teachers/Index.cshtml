@@ -1,11 +1,5 @@
 ﻿@page
-@model             IndexModel
-
-@{
-    ViewData["Title"] = "教师管理 - 沈航计算机教师工作量管理系统";
-}
-
-<h1>教师管理</h1>
+@model IndexModel
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -13,9 +7,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Teacher[0].Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Teacher[0].Name)
             </th>
@@ -34,9 +25,6 @@
     <tbody>
 @foreach (var item in Model.Teacher) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>

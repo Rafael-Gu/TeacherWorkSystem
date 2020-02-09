@@ -12,32 +12,41 @@ namespace TeacherWork.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "{0}是必填的")]
+        [Display(Name = "课程")]
         public string SubjectID { get; set; }
         public Subject Subject { get; set; }
 
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "教师")]
         public string TeacherID { get; set; }
         public Teacher Teacher { get; set; }
 
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "起始年")]
         public int StartYear { get; set; }
 
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "结束年")]
         public int EndYear { get; set; }
 
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "学期")]
         public int Semester { get; set; }
 
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "开课类别")]
         public string Type { get; set; }
 
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "学分")]
         public decimal Credit { get; set; }//定点小数类型
 
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "理论学时")]
         public int PeriodThr { get; set; }
 
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "实验学时")]
         public int PeriodExp { get; set; }
 
         public int PeriodCrs //
@@ -48,19 +57,26 @@ namespace TeacherWork.Models
             }
         }
 
+        
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "正常选课人数")]
         public int CountNormal { get; set; }
 
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "非重修选课人数")]
         public int CountNonRetake { get; set; }
 
         [Required(ErrorMessage = "{0}是必填的！")]
+        [Display(Name = "选课总人数")]
         public int Count { get; set; }
 
+        [Display(Name = "新开课")]
         public bool IsNew { get; set; }
-
+        
+        [Display(Name = "考核方式")]
         public string ExamType { get; set; }
-
-
+        
+        [Display(Name = "课程性质")]
+        public string Attribute { get; set; }
     }
 }
