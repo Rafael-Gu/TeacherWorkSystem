@@ -74,9 +74,20 @@ namespace TeacherWork.Models
         public bool IsNew { get; set; }
         
         [Display(Name = "考核方式")]
-        public string ExamType { get; set; }
+        public AssessmentType Assessment { get; set; }
         
         [Display(Name = "课程性质")]
         public string Attribute { get; set; }
+
+        [Display(Name = "校级质量工程")]
+        public bool IsSQE { get; set; }
+    }
+
+    public enum AssessmentType
+    {
+        [Display(Name = "考试")]
+        Examination,
+        [Display(Name = "考查")]
+        Checking,
     }
 }

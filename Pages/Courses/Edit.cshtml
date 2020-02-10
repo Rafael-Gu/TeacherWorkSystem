@@ -1,5 +1,11 @@
 ﻿@page
-@model             EditModel
+@model EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
 
 <h4>Course</h4>
 <hr />
@@ -74,9 +80,19 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="Course.ExamType" class="control-label"></label>
-                <input asp-for="Course.ExamType" class="form-control" />
-                <span asp-validation-for="Course.ExamType" class="text-danger"></span>
+                <label asp-for="Course.Assessment" class="control-label"></label>
+                <select asp-for="Course.Assessment" class="form-control"></select>
+                <span asp-validation-for="Course.Assessment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Course.Attribute" class="control-label"></label>
+                <input asp-for="Course.Attribute" class="form-control" />
+                <span asp-validation-for="Course.Attribute" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Course.IsSQE" /> @Html.DisplayNameFor(model => model.Course.IsSQE)
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

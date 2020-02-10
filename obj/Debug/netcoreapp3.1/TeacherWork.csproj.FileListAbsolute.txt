@@ -321,7 +321,6 @@ P:\Visual Studio 2017 Projects\TeacherWorkSystem\bin\Debug\netcoreapp3.1\runtime
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\TeacherWork.csprojAssemblyReference.cache
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\staticwebassets\TeacherWork.StaticWebAssets.Manifest.cache
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\staticwebassets\TeacherWork.StaticWebAssets.xml
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\TeacherWork.MvcApplicationPartsAssemblyInfo.cache
@@ -350,6 +349,7 @@ P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\P
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Teachers\Details.cshtml.g.cs
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Teachers\Edit.cshtml.g.cs
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Teachers\Index.cshtml.g.cs
+P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\TeacherWork.csprojAssemblyReference.cache
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Courses\Create.cshtml.g.cs
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Courses\Delete.cshtml.g.cs
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Courses\Details.cshtml.g.cs

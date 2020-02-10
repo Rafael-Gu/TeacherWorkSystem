@@ -43,23 +43,24 @@ namespace TeacherWork.Services
 			}
 		}
 
-		public decimal K2
-		{
-			get
-			{
-				if(Course.ExamType == "考试")
-				{
-					if (Course.Attribute == "专业选修课")
-						return 0.15M;
-					else
-						return 0.10M;
-				}
-				else
-				{
-					return 0.15M;
-				}
-			}
-		}
+		public decimal K2 => throw new NotImplementedException();
+		//public decimal K2
+		//{
+		//	get
+		//	{
+		//		if(Course.Assessment == "考试")
+		//		{
+		//			if (Course.Attribute == "专业选修课")
+		//				return 0.15M;
+		//			else
+		//				return 0.10M;
+		//		}
+		//		else
+		//		{
+		//			return 0.15M;
+		//		}
+		//	}
+		//}
 
 		public decimal K3 => throw new NotImplementedException();
 

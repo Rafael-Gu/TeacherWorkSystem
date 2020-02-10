@@ -1,5 +1,11 @@
 ﻿@page
-@model             DetailsModel
+@model DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
 
 <div>
     <h4>Course</h4>
@@ -84,10 +90,22 @@
             @Html.DisplayFor(model => model.Course.IsNew)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Course.ExamType)
+            @Html.DisplayNameFor(model => model.Course.Assessment)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Course.ExamType)
+            @Html.DisplayFor(model => model.Course.Assessment)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Course.Attribute)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Course.Attribute)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Course.IsSQE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Course.IsSQE)
         </dd>
     </dl>
 </div>

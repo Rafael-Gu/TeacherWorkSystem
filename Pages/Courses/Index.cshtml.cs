@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using TeacherWork.Data;
 using TeacherWork.Models;
 
-namespace TeacherWork.Pages.Courses
+namespace TeacherWork
 {
     public class IndexModel : PageModel
     {
-        private readonly TeacherWorkContext _context;
+        private readonly TeacherWork.Data.TeacherWorkContext _context;
 
-        public IndexModel(TeacherWorkContext context)
+        public IndexModel(TeacherWork.Data.TeacherWorkContext context)
         {
             _context = context;
         }
 
-        public IList<Course> Course { get; set; }
+        public IList<Course> Course { get;set; }
 
         public async Task OnGetAsync()
         {

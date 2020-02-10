@@ -39,6 +39,12 @@ namespace TeacherWork.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Assessment")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Attribute")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
@@ -49,15 +55,15 @@ namespace TeacherWork.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Credit")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(5,2)");
 
                     b.Property<int>("EndYear")
                         .HasColumnType("int");
 
-                    b.Property<string>("ExamType")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsNew")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSQE")
                         .HasColumnType("bit");
 
                     b.Property<int>("PeriodExp")

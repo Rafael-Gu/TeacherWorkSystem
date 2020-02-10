@@ -18,6 +18,7 @@ namespace TeacherWork.Data
         {
             base.OnModelCreating(mBuilder);
             mBuilder.Entity<Class>().HasKey(c => new { c.Profession, c.Index });
+            mBuilder.Entity<Course>().Property(p => p.Credit).HasColumnType("decimal(5,2)");
         }
 
         public DbSet<Teacher> Teacher { get; set; }
