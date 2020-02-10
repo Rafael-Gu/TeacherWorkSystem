@@ -55,7 +55,7 @@ namespace TeacherWork.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("Credit")
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("EndYear")
                         .HasColumnType("int");
