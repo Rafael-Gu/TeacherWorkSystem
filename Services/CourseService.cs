@@ -9,8 +9,6 @@ namespace TeacherWork.Services
 {
 	public class CourseService : ICourseService
 	{
-
-
 		public Teacher Teacher
 		{
 			get
@@ -74,11 +72,17 @@ namespace TeacherWork.Services
 		{
 			get
 			{
-				throw new NotImplementedException();
+				return Jz * 1.02M * (0.5M + (N_ - 15) * 0.03M) * (1 + K2 + K3) * Cx * N / N_;
 			}
 		}
 
-		public decimal Jz => throw new NotImplementedException();
+		public decimal Jz
+		{
+			get
+			{
+				return Course.Task.Name == "上机" ? Course.PeriodTsk : Course.PeriodThr;
+			}
+		}
 
 		public decimal Cx
 		{
@@ -93,6 +97,22 @@ namespace TeacherWork.Services
 			get
 			{	
 				return K0 * Course.Count * Course.PeriodTsk * K1 * (1.0M+K2+K3);
+			}
+		}
+
+		public decimal N
+		{
+			get
+			{
+				return Course.Count;
+			}
+		}
+
+		public decimal N_
+		{
+			get
+			{
+				return 15M;
 			}
 		}
 	}
