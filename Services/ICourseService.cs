@@ -16,5 +16,7 @@ namespace TeacherWork.Services
 		
 		public decimal Jz { get; }
 		public decimal Cx { get; }
+
+		public decimal MajorWork { get; }
 	}
 }

@@ -57,6 +57,14 @@ namespace TeacherWork.Models
             }
         }
 
+        [Required(ErrorMessage = "{0}是必填的")]
+        [Display(Name = "任务类型")]
+        public int TaskId { get; set; }
+        public Task Task { get; set; }
+
+        [Display(Name = "任务学时")]
+        public int PeriodTsk { get; set; }
+
         
         [Required(ErrorMessage = "{0}是必填的！")]
         [Display(Name = "正常选课人数")]

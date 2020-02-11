@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using TeacherWork.Models;
@@ -43,31 +44,56 @@ namespace TeacherWork.Services
 			}
 		}
 
-		public decimal K2 => throw new NotImplementedException();
-		//public decimal K2
-		//{
-		//	get
-		//	{
-		//		if(Course.Assessment == "考试")
-		//		{
-		//			if (Course.Attribute == "专业选修课")
-		//				return 0.15M;
-		//			else
-		//				return 0.10M;
-		//		}
-		//		else
-		//		{
-		//			return 0.15M;
-		//		}
-		//	}
-		//}
+		public decimal K2
+		{
+			get
+			{
+				if(Course.Assessment == AssessmentType.Examination)
+				{
+					if (Course.Attribute == "专业选修课")
+						return 0.15M;
+					else
+						return 0.10M;
+				}
+				else
+				{
+					return 0.15M;
+				}
+			}
+		}
 
-		public decimal K3 => throw new NotImplementedException();
+		public decimal K3
+		{
+			get
+			{
+				return Course.IsSQE ? 0.2M : 0.0M;
+			}
+		}
 
-		public decimal G => throw new NotImplementedException();
+		public decimal G
+		{
+			get
+			{
+				throw new NotImplementedException();
+			}
+		}
 
 		public decimal Jz => throw new NotImplementedException();
 
-		public decimal Cx => throw new NotImplementedException();
+		public decimal Cx
+		{
+			get
+			{
+				return 1.0M;
+			}
+		}
+
+		public decimal MajorWork
+		{
+			get
+			{	
+				return K0 * Course.Count * Course.PeriodTsk * K1 * (1.0M+K2+K3);
+			}
+		}
 	}
 }
