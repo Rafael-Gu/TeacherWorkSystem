@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using TeacherWork.Data;
+using System.Collections.Generic;
 using TeacherWork.Models;
+using Task = System.Threading.Tasks.Task;
 
 namespace TeacherWork
 {
-    public class IndexModel : PageModel
-    {
-        private readonly TeacherWork.Data.TeacherWorkContext _context;
+	public class IndexModel : PageModel
+	{
+		private readonly TeacherWork.Data.TeacherWorkContext _context;
 
-        public IndexModel(TeacherWork.Data.TeacherWorkContext context)
-        {
-            _context = context;
-        }
+		public IndexModel(TeacherWork.Data.TeacherWorkContext context)
+		{
+			_context = context;
+		}
 
-        public IList<Course> Course { get;set; }
+		public IList<Course> Course { get; set; }
 
-        public async Task OnGetAsync()
-        {
-            Course = await _context.Course
-                .Include(c => c.Subject)
-                .Include(c => c.Teacher).ToListAsync();
-        }
-    }
+		public async Task OnGetAsync()
+		{
+			Course = await _context.Course
+				.Include(c => c.Subject)
+				.Include(c => c.Teacher).ToListAsync();
+		}
+	}
 }

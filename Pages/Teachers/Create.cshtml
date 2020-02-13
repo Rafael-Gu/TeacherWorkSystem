@@ -1,5 +1,11 @@
 ﻿@page
-@model CreateModel
+@model             CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
 
 <h4>Teacher</h4>
 <hr />
@@ -21,11 +27,6 @@
                 <label asp-for="Teacher.Department" class="control-label"></label>
                 <input asp-for="Teacher.Department" class="form-control" />
                 <span asp-validation-for="Teacher.Department" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Teacher.Birth" class="control-label"></label>
-                <input asp-for="Teacher.Birth" class="form-control" />
-                <span asp-validation-for="Teacher.Birth" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Teacher.Rank" class="control-label"></label>
