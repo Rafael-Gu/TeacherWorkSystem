@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using TeacherWork.Models;
+﻿using TeacherWork.Models;
 
 namespace TeacherWork.Services
 {
@@ -31,7 +26,7 @@ namespace TeacherWork.Services
 		{
 			get
 			{
-				if(Course.Count < 30)
+				if (Course.Count < 30)
 				{
 					return 1.0M;
 				}
@@ -46,7 +41,7 @@ namespace TeacherWork.Services
 		{
 			get
 			{
-				if(Course.Assessment == AssessmentType.Examination)
+				if (Course.Assessment == AssessmentType.Examination)
 				{
 					if (Course.Attribute == "专业选修课")
 						return 0.15M;
@@ -95,8 +90,8 @@ namespace TeacherWork.Services
 		public decimal MajorWork
 		{
 			get
-			{	
-				return K0 * Course.Count * Course.PeriodTsk * K1 * (1.0M+K2+K3);
+			{
+				return K0 * Course.Count * Course.PeriodTsk * K1 * (1.0M + K2 + K3);
 			}
 		}
 

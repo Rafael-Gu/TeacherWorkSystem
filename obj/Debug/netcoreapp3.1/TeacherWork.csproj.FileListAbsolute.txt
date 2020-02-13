@@ -344,11 +344,6 @@ P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Teacher
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\TeacherWork.csproj.CopyComplete
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\TeacherWork.dll
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\TeacherWork.pdb
-P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Teachers\Create.cshtml.g.cs
-P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Teachers\Delete.cshtml.g.cs
-P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Teachers\Details.cshtml.g.cs
-P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Teachers\Edit.cshtml.g.cs
-P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Teachers\Index.cshtml.g.cs
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\TeacherWork.csprojAssemblyReference.cache
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Courses\Create.cshtml.g.cs
 P:\Visual Studio 2017 Projects\TeacherWorkSystem\obj\Debug\netcoreapp3.1\Razor\Pages\Courses\Delete.cshtml.g.cs
