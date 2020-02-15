@@ -24,5 +24,8 @@ namespace TeacherWork.Data
 
 		public string strTeacher;
 		public string strSubject;
+
+		
 	}
+
 }

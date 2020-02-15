@@ -30,6 +30,12 @@
     <Folder Include="Pages\Subjects\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="input.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
 
 </Project>
