@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TeacherWork.Models;
+﻿using TeacherWork.Models;
 
 namespace TeacherWork.Services
 {
 	public class CourseService : ICourseService
 	{
-
-
 		public Teacher Teacher
 		{
 			get
@@ -32,7 +26,7 @@ namespace TeacherWork.Services
 		{
 			get
 			{
-				if(Course.Count < 30)
+				if (Course.Count < 30)
 				{
 					return 1.0M;
 				}
@@ -47,7 +41,7 @@ namespace TeacherWork.Services
 		{
 			get
 			{
-				if(Course.ExamType == "考试")
+				if (Course.Assessment == AssessmentType.Examination)
 				{
 					if (Course.Attribute == "专业选修课")
 						return 0.15M;
@@ -61,12 +55,60 @@ namespace TeacherWork.Services
 			}
 		}
 
-		public decimal K3 => throw new NotImplementedException();
+		public decimal K3
+		{
+			get
+			{
+				return Course.IsSQE ? 0.2M : 0.0M;
+			}
+		}
 
-		public decimal G => throw new NotImplementedException();
+		public decimal G
+		{
+			get
+			{
+				return Jz * 1.02M * (0.5M + (N_ - 15) * 0.03M) * (1 + K2 + K3) * Cx * N / N_;
+			}
+		}
 
-		public decimal Jz => throw new NotImplementedException();
+		public decimal Jz
+		{
+			get
+			{
+				return Course.Task.Name == "上机" ? Course.PeriodTsk : Course.PeriodThr;
+			}
+		}
 
-		public decimal Cx => throw new NotImplementedException();
+		public decimal Cx
+		{
+			get
+			{
+				return 1.0M;
+			}
+		}
+
+		public decimal MajorWork
+		{
+			get
+			{
+				return K0 * Course.Count * Course.PeriodTsk * K1 * (1.0M + K2 + K3);
+			}
+		}
+
+		public decimal N
+		{
+			get
+			{
+				return Course.Count;
+			}
+		}
+
+		public decimal N_
+		{
+			get
+			{
+				return 15M;
+			}
+		}
 	}
 }

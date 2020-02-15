@@ -1,5 +1,11 @@
 ﻿@page
-@model DetailsModel
+@model TeacherWork.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
 
 <div>
     <h4>Teacher</h4>
@@ -16,12 +22,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Teacher.Department)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Teacher.Birth)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Teacher.Birth)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Teacher.Rank)

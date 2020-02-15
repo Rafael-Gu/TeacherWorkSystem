@@ -1,5 +1,11 @@
 ﻿@page
-@model             IndexModel
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -47,7 +53,13 @@
                 @Html.DisplayNameFor(model => model.Course[0].IsNew)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Course[0].ExamType)
+                @Html.DisplayNameFor(model => model.Course[0].Assessment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].Attribute)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course[0].IsSQE)
             </th>
             <th></th>
         </tr>
@@ -95,7 +107,13 @@
                 @Html.DisplayFor(modelItem => item.IsNew)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ExamType)
+                @Html.DisplayFor(modelItem => item.Assessment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attribute)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSQE)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
