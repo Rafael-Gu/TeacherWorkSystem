@@ -4,6 +4,7 @@ using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TeacherWork.Data;
 using TeacherWork.Models;
 
@@ -32,11 +33,14 @@ namespace TeacherWork.Services
 			try
 			{
 				workbook = new HSSFWorkbook(new FileStream(filename, FileMode.Open));
-				ISheet worksheet = workbook.GetSheet("主修课程");
+				ISheet sheet = workbook.GetSheet("主修课程");
 
 				ImportingEntry ientry = new ImportingEntry();
-				worksheet.RemoveRow(worksheet.GetRow(0));
-				foreach(IRow row in worksheet)
+				ImportedData idata = new ImportedData();
+
+				sheet.RemoveRow(sheet.GetRow(0));
+
+				foreach(IRow row in sheet)
 				{
 					ientry.Teacher = new Teacher()
 					{
@@ -55,13 +59,49 @@ namespace TeacherWork.Services
 					ientry.Course = new Course()
 					{
 						TeacherID = ientry.Teacher.Id,
+						Teacher = ientry.Teacher,
 						SubjectID = ientry.Subject.Id,
+						Subject = ientry.Subject,
 						Credit = decimal.Parse(row.GetCell(7).ToString()),
-						
+						Semester = int.Parse(row.GetCell(1).ToString()),
+						Assessment = row.GetCell(20).ToString() switch { "考试" => AssessmentType.Examination, _ => AssessmentType.Checking },
+						Type = row.GetCell(2).ToString(),
+						Count = int.Parse(row.GetCell(10).ToString()),
+						StartYear = int.Parse(row.GetCell(0).ToString().Split('-')[0]),
+						EndYear = int.Parse(row.GetCell(0).ToString().Split('-')[1]),
+						IsNew = false,
+						IsSQE = false,
 					};
-					
-					
+
+					ientry.Enrolled(idata);
 				}
+				
+				sheet = workbook.GetSheet("新开课");
+				sheet.RemoveRow(sheet.GetRow(0));
+				foreach(IRow row in sheet)
+				{
+					var query =
+						from c in idata.Courses
+						where c.Subject.Name == row.GetCell(2).ToString() && c.Teacher.Name == row.GetCell(3).ToString() && c.Subject.Department == row.GetCell(1).ToString()
+						select c;
+					foreach(var q in query)
+					{
+						q.IsNew = true;
+					}
+				}
+
+				sheet = workbook.GetSheet("校级教学质量工程");
+				List<string> sqelist = new List<string>();
+				{
+					IRow row = sheet.GetRow(0);
+					row.RemoveCell(row.GetCell(0));
+					foreach(ICell c in row)
+					{
+						sqelist.Add(c.ToString());
+					}
+				}
+
+
 
 			}
 			catch (FileNotFoundException)
@@ -78,7 +118,6 @@ namespace TeacherWork.Services
 		{
 			if (workbook == null)
 				return;
-
 		}
 	}
 
@@ -118,10 +157,9 @@ namespace TeacherWork.Services
 		public Task Task { get; set; }
 		public Course Course { get; set; }
 
-		public void Involve(ImportedData idata)
+		public void Enrolled(ImportedData idata)
 		{
 			idata.Teachers.Add(Teacher);
-			
 		}
 	}
 }
