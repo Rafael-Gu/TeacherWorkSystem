@@ -17,7 +17,6 @@ namespace TeacherWork.Services
 		private List<Teacher> teachers;
 		private List<Course> courses;
 		private List<Subject> subjects;
-		private List<Task> tasks;
 
 		private IWorkbook workbook = null;
 
@@ -55,7 +54,6 @@ namespace TeacherWork.Services
 						Name = row.GetCell(5).ToString(),
 						Department = row.GetCell(3).ToString(),
 					};
-
 					ientry.Course = new Course()
 					{
 						TeacherID = ientry.Teacher.Id,
@@ -72,8 +70,9 @@ namespace TeacherWork.Services
 						IsNew = false,
 						IsSQE = false,
 					};
+					
 
-					ientry.Enrolled(idata);
+					ientry.RollInto(idata);
 				}
 				
 				sheet = workbook.GetSheet("新开课");
@@ -92,17 +91,21 @@ namespace TeacherWork.Services
 
 				sheet = workbook.GetSheet("校级教学质量工程");
 				List<string> sqelist = new List<string>();
+				foreach (IRow row in sheet)
 				{
-					IRow row = sheet.GetRow(0);
 					row.RemoveCell(row.GetCell(0));
-					foreach(ICell c in row)
+					foreach (ICell c in row)
 					{
-						sqelist.Add(c.ToString());
+						var query = 
+							from crs in idata.Courses 
+							where crs.Subject.Name == c.ToString() 
+							select crs;
+						foreach (var q in query)
+						{
+							q.IsSQE = true;
+						}
 					}
 				}
-
-
-
 			}
 			catch (FileNotFoundException)
 			{
@@ -125,7 +128,6 @@ namespace TeacherWork.Services
 	{
 		public HashSet<Teacher> Teachers { get; set; }
 		public HashSet<Subject> Subjects { get; set; }
-		public HashSet<Task> Tasks { get; set; }
 		public HashSet<Course> Courses { get; set; }
 
 		public void Import(TeacherWorkContext context)
@@ -137,10 +139,6 @@ namespace TeacherWork.Services
 			foreach(var subject in Subjects)
 			{
 				context.Add(subject);
-			}
-			foreach(var task in Tasks)
-			{
-				context.Add(task);
 			}
 			foreach(var course in Courses)
 			{
@@ -154,10 +152,9 @@ namespace TeacherWork.Services
 	{
 		public Teacher Teacher { get; set; }
 		public Subject Subject { get; set; }
-		public Task Task { get; set; }
 		public Course Course { get; set; }
 
-		public void Enrolled(ImportedData idata)
+		public void RollInto(ImportedData idata)
 		{
 			idata.Teachers.Add(Teacher);
 		}
