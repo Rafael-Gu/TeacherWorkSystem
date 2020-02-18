@@ -1,14 +1,14 @@
 ﻿@page
-@model TeacherWork.DetailsModel
+@model DetailsModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>详情</h1>
 
 <div>
-    <h4>Teacher</h4>
+    <h4>教师信息</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -32,6 +32,6 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Teacher.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Teacher.Id">编辑</a> |
+    <a asp-page="./Index">返回列表</a>
 </div>

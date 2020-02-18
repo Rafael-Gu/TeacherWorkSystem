@@ -4,6 +4,7 @@ using NPOI.SS.UserModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TeacherWork.Data;
 using TeacherWork.Models;
 
@@ -16,7 +17,6 @@ namespace TeacherWork.Services
 		private List<Teacher> teachers;
 		private List<Course> courses;
 		private List<Subject> subjects;
-		private List<Task> tasks;
 
 		private IWorkbook workbook = null;
 
@@ -32,11 +32,14 @@ namespace TeacherWork.Services
 			try
 			{
 				workbook = new HSSFWorkbook(new FileStream(filename, FileMode.Open));
-				ISheet worksheet = workbook.GetSheet("主修课程");
+				ISheet sheet = workbook.GetSheet("主修课程");
 
 				ImportingEntry ientry = new ImportingEntry();
-				worksheet.RemoveRow(worksheet.GetRow(0));
-				foreach(IRow row in worksheet)
+				ImportedData idata = new ImportedData();
+
+				sheet.RemoveRow(sheet.GetRow(0));
+
+				foreach(IRow row in sheet)
 				{
 					ientry.Teacher = new Teacher()
 					{
@@ -51,18 +54,58 @@ namespace TeacherWork.Services
 						Name = row.GetCell(5).ToString(),
 						Department = row.GetCell(3).ToString(),
 					};
-
 					ientry.Course = new Course()
 					{
 						TeacherID = ientry.Teacher.Id,
+						Teacher = ientry.Teacher,
 						SubjectID = ientry.Subject.Id,
+						Subject = ientry.Subject,
 						Credit = decimal.Parse(row.GetCell(7).ToString()),
-						
+						Semester = int.Parse(row.GetCell(1).ToString()),
+						Assessment = row.GetCell(20).ToString() switch { "考试" => AssessmentType.Examination, _ => AssessmentType.Checking },
+						Type = row.GetCell(2).ToString(),
+						Count = int.Parse(row.GetCell(10).ToString()),
+						StartYear = int.Parse(row.GetCell(0).ToString().Split('-')[0]),
+						EndYear = int.Parse(row.GetCell(0).ToString().Split('-')[1]),
+						IsNew = false,
+						IsSQE = false,
 					};
 					
-					
+
+					ientry.RollInto(idata);
+				}
+				
+				sheet = workbook.GetSheet("新开课");
+				sheet.RemoveRow(sheet.GetRow(0));
+				foreach(IRow row in sheet)
+				{
+					var query =
+						from c in idata.Courses
+						where c.Subject.Name == row.GetCell(2).ToString() && c.Teacher.Name == row.GetCell(3).ToString() && c.Subject.Department == row.GetCell(1).ToString()
+						select c;
+					foreach(var q in query)
+					{
+						q.IsNew = true;
+					}
 				}
 
+				sheet = workbook.GetSheet("校级教学质量工程");
+				List<string> sqelist = new List<string>();
+				foreach (IRow row in sheet)
+				{
+					row.RemoveCell(row.GetCell(0));
+					foreach (ICell c in row)
+					{
+						var query = 
+							from crs in idata.Courses 
+							where crs.Subject.Name == c.ToString() 
+							select crs;
+						foreach (var q in query)
+						{
+							q.IsSQE = true;
+						}
+					}
+				}
 			}
 			catch (FileNotFoundException)
 			{
@@ -78,7 +121,6 @@ namespace TeacherWork.Services
 		{
 			if (workbook == null)
 				return;
-
 		}
 	}
 
@@ -86,7 +128,6 @@ namespace TeacherWork.Services
 	{
 		public HashSet<Teacher> Teachers { get; set; }
 		public HashSet<Subject> Subjects { get; set; }
-		public HashSet<Task> Tasks { get; set; }
 		public HashSet<Course> Courses { get; set; }
 
 		public void Import(TeacherWorkContext context)
@@ -98,10 +139,6 @@ namespace TeacherWork.Services
 			foreach(var subject in Subjects)
 			{
 				context.Add(subject);
-			}
-			foreach(var task in Tasks)
-			{
-				context.Add(task);
 			}
 			foreach(var course in Courses)
 			{
@@ -115,13 +152,11 @@ namespace TeacherWork.Services
 	{
 		public Teacher Teacher { get; set; }
 		public Subject Subject { get; set; }
-		public Task Task { get; set; }
 		public Course Course { get; set; }
 
-		public void Involve(ImportedData idata)
+		public void RollInto(ImportedData idata)
 		{
 			idata.Teachers.Add(Teacher);
-			
 		}
 	}
 }
