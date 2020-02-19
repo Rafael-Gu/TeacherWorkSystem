@@ -18,10 +18,7 @@ namespace TeacherWork.Models
 		[Display(Name = "所属部门")]
 		public string Department { get; set; }
 
-		[Display(Name = "职称")]
-		public string Rank { get; set; }
-
-		public List<Course> Courses { get; set; }
+		public IEnumerable<Course> Courses { get; set; }
 
 		public string IdName
 		{
