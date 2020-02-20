@@ -17,5 +17,13 @@ namespace TeacherWork.Models
 		public string Department { get; set; }
 
 		public IEnumerable<Course> Courses { get; set; }
+
+		public string IdName
+		{
+			get
+			{
+				return $"{Id}/{Name}";
+			}
+		}
 	}
 }

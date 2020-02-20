@@ -67,7 +67,6 @@ namespace TeacherWork.Services
 						Attribute = row.GetCell(16).ToString(),
 						PeriodExp = string.IsNullOrEmpty(row.GetCell(8).ToString()) ? 0 : int.Parse(row.GetCell(8).ToString()),
 						PeriodThr = string.IsNullOrEmpty(row.GetCell(7).ToString()) ? 0 : int.Parse(row.GetCell(7).ToString()),
-						//PeriodCrs = string.IsNullOrEmpty(row.GetCell(6).ToString()) ? 0 : int.Parse(row.GetCell(6).ToString()),
 						Task = row.GetCell(14).ToString(),
 					};
 
