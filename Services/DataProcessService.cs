@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using TeacherWork.Data;
 using TeacherWork.Models;
+using TeacherWork.Utilities;
 
 
 namespace TeacherWork.Services
@@ -65,8 +66,9 @@ namespace TeacherWork.Services
 						IsNew = false,
 						IsSQE = false,
 						Attribute = row.GetCell(16).ToString(),
-						PeriodExp = string.IsNullOrEmpty(row.GetCell(8).ToString()) ? 0 : int.Parse(row.GetCell(8).ToString()),
-						PeriodThr = string.IsNullOrEmpty(row.GetCell(7).ToString()) ? 0 : int.Parse(row.GetCell(7).ToString()),
+						PeriodExp = StringUtility.ParsePeriod(row.GetCell(8).ToString()),
+						PeriodThr = StringUtility.ParsePeriod(row.GetCell(7).ToString()),
+						PeriodTsk = StringUtility.ParsePeriod(row.GetCell(15).ToString()),//string.IsNullOrEmpty(row.GetCell(7).ToString()) ? 0 : int.Parse(row.GetCell(7).ToString()),
 						Task = row.GetCell(14).ToString(),
 					};
 
