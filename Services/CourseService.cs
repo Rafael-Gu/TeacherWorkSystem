@@ -75,7 +75,7 @@ namespace TeacherWork.Services
 		{
 			get
 			{
-				return Course.Task.Name == "上机" ? Course.PeriodTsk : Course.PeriodThr;
+				return Course.Task == "上机" ? Course.PeriodTsk : Course.PeriodThr;
 			}
 		}
 

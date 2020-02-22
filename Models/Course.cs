@@ -45,17 +45,13 @@ namespace TeacherWork.Models
 		[Display(Name = "实验学时")]
 		public int PeriodExp { get; set; }
 
-		public int PeriodCrs //
-		{
-			get
-			{
-				return PeriodExp + PeriodThr;
-			}
-		}
+		//[Required(ErrorMessage = "{0}是必填的！")]
+		//[Display(Name = "课程总学时")]
+		//public int PeriodCrs { get; set; }
 
 		[Required(ErrorMessage = "{0}是必填的")]
 		[Display(Name = "任务类型")]
-		public string TaskId { get; set; }
+		public string Task { get; set; }
 
 		[Display(Name = "任务学时")]
 		public int PeriodTsk { get; set; }

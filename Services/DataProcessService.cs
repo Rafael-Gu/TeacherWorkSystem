@@ -7,16 +7,13 @@ using System.IO;
 using System.Linq;
 using TeacherWork.Data;
 using TeacherWork.Models;
+using TeacherWork.Utilities;
 
 
 namespace TeacherWork.Services
 {
 	public class DataProcessService : IDataProcessService
 	{
-
-		private List<Teacher> teachers;
-		private List<Course> courses;
-		private List<Subject> subjects;
 
 		private IWorkbook workbook = null;
 
@@ -46,7 +43,6 @@ namespace TeacherWork.Services
 						Id = row.GetCell(12).ToString(),
 						Name = row.GetCell(13).ToString(),
 						Department = row.GetCell(11).ToString(),
-						Rank = ""
 					};
 					ientry.Subject = new Subject()
 					{
@@ -69,8 +65,31 @@ namespace TeacherWork.Services
 						EndYear = int.Parse(row.GetCell(0).ToString().Split('-')[1]),
 						IsNew = false,
 						IsSQE = false,
+						Attribute = row.GetCell(16).ToString(),
+						PeriodExp = StringUtility.ParsePeriod(row.GetCell(8).ToString()),
+						PeriodThr = StringUtility.ParsePeriod(row.GetCell(7).ToString()),
+						PeriodTsk = StringUtility.ParsePeriod(row.GetCell(15).ToString()),//string.IsNullOrEmpty(row.GetCell(7).ToString()) ? 0 : int.Parse(row.GetCell(7).ToString()),
+						Task = row.GetCell(14).ToString(),
 					};
+
+					var course = ientry.Course;
+					switch(course.Task)
+					{
+						case "理论学时":
+							course.Attribute = "主讲";
+							break;
+						case "单列实践":
+							course.Attribute = "实践";
+							break;
+						default:
+							break;
+					}
 					
+					if(course.PeriodExp != 0)
+					{
+						course.Task = "实验学时";
+						course.Attribute = "上机";
+					}
 
 					ientry.RollInto(idata);
 				}
