@@ -36,8 +36,8 @@ namespace TeacherWork.Pages.Courses
 			{
 				return NotFound();
 			}
-			ViewData["SubjectID"] = new SelectList(_context.Subject, "Id", "Id");
-			ViewData["TeacherID"] = new SelectList(_context.Teacher, "Id", "Id");
+			ViewData["SubjectID"] = new SelectList(_context.Subject, "Id", "IdName");
+			ViewData["TeacherID"] = new SelectList(_context.Teacher, "Id", "IdName");
 			return Page();
 		}
 

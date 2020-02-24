@@ -50,26 +50,27 @@ namespace TeacherWork.Services
 						Name = row.GetCell(5).ToString(),
 						Department = row.GetCell(3).ToString(),
 					};
-					ientry.Course = new Course()
+					ientry.Course = new Course();
+
 					{
-						TeacherID = ientry.Teacher.Id,
-						Teacher = ientry.Teacher,
-						SubjectID = ientry.Subject.Id,
-						Subject = ientry.Subject,
-						Credit = decimal.Parse(row.GetCell(7).ToString()),
-						Semester = int.Parse(row.GetCell(1).ToString()),
-						Assessment = row.GetCell(20).ToString() switch { "考试" => AssessmentType.Examination, _ => AssessmentType.Checking },
-						Type = row.GetCell(2).ToString(),
-						Count = int.Parse(row.GetCell(10).ToString()),
-						StartYear = int.Parse(row.GetCell(0).ToString().Split('-')[0]),
-						EndYear = int.Parse(row.GetCell(0).ToString().Split('-')[1]),
-						IsNew = false,
-						IsSQE = false,
-						Attribute = row.GetCell(16).ToString(),
-						PeriodExp = StringUtility.ParsePeriod(row.GetCell(8).ToString()),
-						PeriodThr = StringUtility.ParsePeriod(row.GetCell(7).ToString()),
-						PeriodTsk = StringUtility.ParsePeriod(row.GetCell(15).ToString()),//string.IsNullOrEmpty(row.GetCell(7).ToString()) ? 0 : int.Parse(row.GetCell(7).ToString()),
-						Task = row.GetCell(14).ToString(),
+						ientry.Course.TeacherID = ientry.Teacher.Id;
+						//ientry.Course.Teacher = ientry.Teacher;
+						ientry.Course.SubjectID = ientry.Subject.Id;
+						//ientry.Course.Subject = ientry.Subject;
+						ientry.Course.Credit = decimal.Parse(row.GetCell(9).ToString());
+						ientry.Course.Semester = int.Parse(row.GetCell(1).ToString());
+						ientry.Course.Assessment = row.GetCell(20).ToString() switch { "考试" => AssessmentType.Examination, _ => AssessmentType.Checking };
+						ientry.Course.Type = row.GetCell(2).ToString();
+						ientry.Course.Count = int.Parse(row.GetCell(10).ToString());
+						ientry.Course.StartYear = int.Parse(row.GetCell(0).ToString().Split('-')[0]);
+						ientry.Course.EndYear = int.Parse(row.GetCell(0).ToString().Split('-')[1]);
+						ientry.Course.IsNew = false;
+						ientry.Course.IsSQE = false;
+						ientry.Course.Attribute = row.GetCell(16).ToString();
+						ientry.Course.PeriodExp = StringUtility.ParsePeriod(row.GetCell(8).ToString());
+						ientry.Course.PeriodThr = StringUtility.ParsePeriod(row.GetCell(7).ToString());
+						ientry.Course.PeriodTsk = StringUtility.ParsePeriod(row.GetCell(15).ToString());//string.IsNullOrEmpty(row.GetCell(7).ToString()) ? 0 : int.Parse(row.GetCell(7).ToString()),
+						ientry.Course.Task = row.GetCell(14).ToString();
 					};
 
 					var course = ientry.Course;
@@ -93,18 +94,21 @@ namespace TeacherWork.Services
 
 					ientry.RollInto(idata);
 				}
-				
+
+				idata.Import(Context);
+
 				sheet = workbook.GetSheet("新开课");
 				sheet.RemoveRow(sheet.GetRow(0));
 				foreach(IRow row in sheet)
 				{
 					var query =
-						from c in idata.Courses
+						from c in Context.Course
 						where c.Subject.Name == row.GetCell(2).ToString() && c.Teacher.Name == row.GetCell(3).ToString() && c.Subject.Department == row.GetCell(1).ToString()
 						select c;
 					foreach(var q in query)
 					{
 						q.IsNew = true;
+						Context.Course.Update(q);
 					}
 				}
 
@@ -115,24 +119,23 @@ namespace TeacherWork.Services
 					row.RemoveCell(row.GetCell(0));
 					foreach (ICell c in row)
 					{
-						var query = 
-							from crs in idata.Courses 
+						var query =
+							from crs in idata.Courses.ToHashSet() 
 							where crs.Subject.Name == c.ToString() 
 							select crs;
 						foreach (var q in query)
 						{
 							q.IsSQE = true;
+							Context.Course.Update(q);
 						}
 					}
 				}
+				Context.SaveChanges();
+				
 			}
 			catch (FileNotFoundException)
 			{
 				throw;
-			}
-			catch (FormatException)
-			{
-				Console.WriteLine("数据异常");
 			}
 		}
 
@@ -149,21 +152,33 @@ namespace TeacherWork.Services
 		public HashSet<Subject> Subjects { get; set; }
 		public HashSet<Course> Courses { get; set; }
 
+		public ImportedData()
+		{
+			Teachers = new HashSet<Teacher>(new Utilities.TeacherComparer());
+			Subjects = new HashSet<Subject>(new Utilities.SubjectComparer());
+			Courses = new HashSet<Course>();
+		}
+
 		public void Import(TeacherWorkContext context)
 		{
-			foreach(var teacher in Teachers)
-			{
-				context.Add(teacher);
-			}
-			foreach(var subject in Subjects)
-			{
-				context.Add(subject);
-			}
-			foreach(var course in Courses)
-			{
-				context.Add(course);
-			}
+			//context.Teacher.Union(Teachers.ToHashSet());
+			//context.Subject.Union(Subjects.ToHashSet());
+			//context.Course.Union(Courses.ToHashSet());
+			context.Teacher.AddRange(Teachers);
+			context.Subject.AddRange(Subjects);
+			context.Course.AddRange(Courses);
 			context.SaveChanges();
+			//foreach (var subject in Subjects)
+			//{
+			//	if (!context.Subject.Any(s => s.Id == subject.Id))
+			//		context.Subject.Add(subject);
+			//}
+			//context.SaveChanges();
+			//foreach (var course in Courses)
+			//{
+			//	context.Course.Add(course);
+			//}
+			//context.SaveChanges();
 		}
 	}
 
@@ -175,7 +190,12 @@ namespace TeacherWork.Services
 
 		public void RollInto(ImportedData idata)
 		{
-			idata.Teachers.Add(Teacher);
+			if(Teacher != null)
+				idata.Teachers.Add(Teacher);
+			if (Subject != null)
+				idata.Subjects.Add(Subject);
+			if (Course != null)
+				idata.Courses.Add(Course);
 		}
 	}
 }

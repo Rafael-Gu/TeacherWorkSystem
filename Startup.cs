@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TeacherWork.Data;
+using TeacherWork.Services;
 
 namespace TeacherWork
 {
@@ -23,7 +24,12 @@ namespace TeacherWork
 			services.AddRazorPages();
 
 			services.AddDbContext<TeacherWorkContext>(options =>
-					options.UseSqlServer(Configuration.GetConnectionString("TeacherWorkContext")));
+			{
+				options.UseSqlServer(Configuration.GetConnectionString("TeacherWorkContext"));
+				options.EnableSensitiveDataLogging();
+			});
+
+			services.AddScoped<ICourseService, CourseService> ();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

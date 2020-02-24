@@ -27,5 +27,35 @@ namespace TeacherWork.Models
 				return $"{Name}/{Id}";
 			}
 		}
+
+		public override int GetHashCode()
+		{
+			return Id.GetHashCode();
+		}
+
+		//public override bool Equals(object obj)
+		//{
+		//	if (obj is Teacher t)
+		//		return Id == t.Id && Name == t.Name;
+		//	else
+		//		return false;
+		//}
+		//
+		//public static bool operator ==(Teacher t1,Teacher t2)
+		//{
+		//	if(t1 is null || t2 is null)
+		//	{
+		//		return !(t1 is null ^ t2 is null);
+		//	}
+		//	else
+		//	{
+		//		return t1.Id == t2.Id && t1.Name == t2.Name;
+		//	}
+		//}
+		//public static bool operator !=(Teacher t1,Teacher t2)
+		//{
+		//	return !(t1 == t2);
+		//}
+
 	}
 }
