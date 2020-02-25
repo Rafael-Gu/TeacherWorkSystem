@@ -10,11 +10,13 @@ namespace TeacherWork.Models
 		[Required(ErrorMessage = "{0}是必填的")]
 		[Display(Name = "课程")]
 		public string SubjectID { get; set; }
+		[Display(Name = "课程名称")]
 		public Subject Subject { get; set; }
 
 		[Required(ErrorMessage = "{0}是必填的！")]
 		[Display(Name = "教师")]
 		public string TeacherID { get; set; }
+		[Display(Name = "教师名称")]
 		public Teacher Teacher { get; set; }
 
 		[Required(ErrorMessage = "{0}是必填的！")]

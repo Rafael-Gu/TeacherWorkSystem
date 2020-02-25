@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Linq;
 using TeacherWork.Models;
 
 namespace TeacherWork.Pages.Teachers
@@ -25,7 +26,10 @@ namespace TeacherWork.Pages.Teachers
 			}
 
 			Teacher = await _context.Teacher.FirstOrDefaultAsync(m => m.Id == id);
-
+			Teacher.Courses = await _context.Course.Include(c=>c.Subject).Where(c => c.TeacherID == Teacher.Id).ToListAsync();
+				/*(from c in _context.Course
+				 where c.TeacherID == Teacher.Id
+				 select c).ToListAsync();*/
 			if (Teacher == null)
 			{
 				return NotFound();

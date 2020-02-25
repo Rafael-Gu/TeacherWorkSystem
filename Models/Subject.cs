@@ -25,5 +25,22 @@ namespace TeacherWork.Models
 				return $"{Id}/{Name}";
 			}
 		}
+
+		//public static bool operator ==(Subject s1,Subject s2)
+		//{
+		//	if (s1 is null || s2 is null)
+		//		return !(s1 is null ^ s2 is null);
+		//	else
+		//		return s1.Id == s2.Id && s1.Name == s2.Name;
+		//}
+		//public static bool operator !=(Subject s1,Subject s2)
+		//{
+		//	return !(s1 == s2);
+		//}
+
+		public override int GetHashCode()
+		{
+			return Id.GetHashCode();
+		}
 	}
 }

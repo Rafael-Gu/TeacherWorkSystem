@@ -4,19 +4,21 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using TeacherWork.Data;
 using TeacherWork.Models;
+using TeacherWork.Services;
 
 namespace TeacherWork.Pages.Courses
 {
 	public class DetailsModel : PageModel
 	{
 		private readonly TeacherWorkContext _context;
+		public Course Course { get; set; }
+		public ICourseService CourseService { get; }
 
-		public DetailsModel(TeacherWorkContext context)
+		public DetailsModel(TeacherWorkContext context,ICourseService courseService)
 		{
 			_context = context;
+			CourseService = courseService;
 		}
-
-		public Course Course { get; set; }
 
 		public async Task<IActionResult> OnGetAsync(int? id)
 		{
@@ -28,6 +30,7 @@ namespace TeacherWork.Pages.Courses
 			Course = await _context.Course
 				.Include(c => c.Subject)
 				.Include(c => c.Teacher).FirstOrDefaultAsync(m => m.Id == id);
+			(CourseService as CourseService).Course = Course;
 
 			if (Course == null)
 			{

@@ -20,31 +20,13 @@
                 @Html.DisplayNameFor(model => model.Course[0].Teacher)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Course[0].StartYear)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course[0].EndYear)
+                学年
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Course[0].Semester)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Course[0].Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course[0].Credit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course[0].PeriodThr)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course[0].PeriodExp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course[0].CountNormal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course[0].CountNonRetake)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Course[0].Count)
@@ -68,37 +50,19 @@
 @foreach (var item in Model.Course) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Subject.Id)
+                @Html.DisplayFor(modelItem => item.Subject.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Teacher.Id)
+                @Html.DisplayFor(modelItem => item.Teacher.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartYear)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndYear)
+                @Html.DisplayFor(modelItem => item.StartYear)-@Html.DisplayFor(modelItem => item.EndYear)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Semester)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Credit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PeriodThr)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PeriodExp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountNormal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CountNonRetake)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Count)
@@ -116,8 +80,8 @@
                 @Html.DisplayFor(modelItem => item.IsSQE)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> <br />
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> <br />
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

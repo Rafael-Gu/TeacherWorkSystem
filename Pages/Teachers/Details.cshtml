@@ -2,13 +2,13 @@
 @model DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = $"{Model.Teacher.Name}教师的详细信息";
 }
 
-<h1>详情</h1>
+<h1>详细信息</h1>
 
 <div>
-    <h4>教师信息</h4>
+    <h4>@(Model.Teacher.Name)教师信息</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -24,7 +24,35 @@
             @Html.DisplayFor(model => model.Teacher.Department)
         </dd>
     </dl>
+   <h5>授课情况</h5>
+   <table class="col-6">
+       <thead>
+           <tr>
+               <th>
+                   课程名称
+               </th>
+               <th class="text-center">
+                   课程人数
+               </th>
+           </tr>
+       </thead>
+       <tbody>
+           @foreach (var item in Model.Teacher.Courses)
+           {
+               <tr>
+                   <td>
+                       <a asp-page="../Courses/Details" asp-route-id="@item.Id">@Html.DisplayFor(model => item.Subject.Name)</a>
+                   </td>
+                   <td class="text-center">
+                       @Html.DisplayFor(model => item.Count)
+                   </td>
+               </tr>
+            }
+       </tbody>
+
+   </table>
 </div>
+<hr />
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Teacher.Id">编辑</a> |
     <a asp-page="./Index">返回列表</a>
